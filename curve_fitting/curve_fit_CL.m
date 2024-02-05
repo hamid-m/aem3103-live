@@ -23,13 +23,25 @@ p = polyfit(x, y, 1);
 disp('MATLAB Poly. Coefficients:')
 disp(p);
 
+% Use own implementation: y(x) = a1*x + a0
+n = length(x);
+Sx = sum(x);
+Sy = sum(y);
+Sxy = sum(x.*y);
+Sxx = sum(x.*x);
+Syy = sum(y.*y);
+a1 = (n*Sxy - Sx*Sy)/(n*Sxx - Sx^2);
+a0 = (Sxx*Sy - Sxy*Sx)/(n*Sxx - Sx^2);
+disp('Own implementation coeff:');
+disp([a1, a0]);
+
 % Estimate CL using model
-y_fit = polyval(p, x);
+y_fit = polyval(p, aoa_deg);
 % y_fit = p(1)*x + p(2)
 
 
 %% Visualize the result
 
 plot(x, y,'*k');
-plot(x, y_fit, '-m');
+plot(aoa_deg, y_fit, '-m');
 
