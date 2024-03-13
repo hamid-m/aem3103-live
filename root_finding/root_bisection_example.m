@@ -19,6 +19,39 @@ ylabel('f(\theta)');
 
 a = 20; b = 40;
 plot([a, b], [0, 0], 'LineWidth', 2);
+
 % Bisection Algorithm
+for i = 1:10
+    xns = (a + b)/2;
+    
+    % Two candidate brackets:
+    % [a xns] or [xns b]
+    % Run check to decide which bracket to proceed with
+    % f(A)*F(B) < 0
+    fa = f(a);
+    fxns = f(xns);
+    
+    fprintf("%d  %f  %f  %f  %f\n", i, a, b, xns, f(xns));
+    
+    if fa*fxns < 0
+        b = xns;
+    else
+        a = xns;
+    end
+    plot([a, b], [i, i], 'LineWidth', 2);
+end
+
+
+
+% Update bracket
+% a = 
+% b = 
+
+
+
 
 % View Result
+fprintf("theta: %f\n", xns);
+plot(xns, f(xns), 'k*');
+
+
