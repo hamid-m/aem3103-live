@@ -26,11 +26,13 @@ y = x.^3 + x.^2 - x + 2;
 yp = 3*x.^2 + 2*x - 1;
 
 yp_num = num_der_fwd(x, y);
+yp_num_cen = num_der_central(x, y);
 
 figure; hold on;
 plot(x, yp);
 plot(x, yp_num);
-legend('exact', 'numerical');
+plot(x, yp_num_cen);
+legend('exact', 'numerical', 'central');
 err = max(abs(yp - yp_num));
 disp(err);
 assert(err < 0.1);
