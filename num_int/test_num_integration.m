@@ -2,7 +2,7 @@
 clc;
 clear;
 
-% Define test case
+% Test Case: Function
 f = @(x) -sin(x) + 1;
 fi = @(x) cos(x) + 1*x;
 a = 0;
@@ -24,4 +24,11 @@ fi_num = num_integration(f, a, b, N, "rec");
 %       a visual test.
 err = abs(fi_exact - fi_num);
 fprintf("Error: %5.3g \n", err);
+
+% Test Case: Discrete Data Points
+x = [0, 1, 2, 3, 4, 5];
+y = x.^2;
+fi_num = num_integration(x, y, "rec");
+fprintf('Discrete Test fi_num: %5.3g \n', fi_num);
+
 

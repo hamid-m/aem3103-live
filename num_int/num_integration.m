@@ -1,20 +1,28 @@
 function I = num_integration(varargin)
-fun = varargin{1};
-a = varargin{2};
-b = varargin{3};
-N = varargin{4};
-if length(varargin) == 4
-    method = "rec";
-else
+nargs = length(varargin);
+assert(nargs == 5 | nargs == 3)
+
+if nargs == 5
+    % num_integration(fun, a, b, N, method)
+    fun = varargin{1};
+    a = varargin{2};
+    b = varargin{3};
+    N = varargin{4};
     method = varargin{5};
+
+    % Setup our x, y values
+    h = (b-a)/N;
+    x = a:h:b;
+    y = fun(x);
+
+elseif nargs == 3
+    % num_integration(x, y, method)
+    x = varargin{1};
+    y = varargin{2};
+    h = x(2) - x(1); % This could be smarter.
+    method = varargin{3};
 end
-
-%function I = num_integration(fun, a, b, N, method)
-
-% Setup our x, y values
-h = (b-a)/N;
-x = a:h:b;
-y = fun(x);
+    
 
 % Compute numerical integral
 if strcmp(method, "rec")
