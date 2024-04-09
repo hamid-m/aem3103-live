@@ -14,13 +14,7 @@ y_exact = 70.0/9*exp(-0.3*x) - 43.0/9*exp(-1.2*x);
 [x_ode45, y_ode45] = ode45(f_dydx, [x(1) x(end)], y0);
 
 % Euler's Method: Own Implementation
-% y(k) = y(k-1) + f(x(k-1), y(k-1))*h
-
-y_eul = nan*zeros(drl, 1);
-y_eul(1) = y0;
-for k=2:drl
-    y_eul(k) = y_eul(k-1) + f_dydx(x(k-1), y_eul(k-1))*h;
-end
+y_eul = ode_eul_method(f_dydx, x, y0);
 
 % Plot results.
 figure;
